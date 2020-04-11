@@ -1,5 +1,6 @@
 def is_game_over(node):
-    winning_indexes = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    winning_indexes = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [
+        0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
     for indexes in winning_indexes:
         hit_count = 0
@@ -17,22 +18,34 @@ def is_game_over(node):
 
     return False, None
 
+def change_element(node):
+    count = 0
+    for index in node:
+        for i in index:
+            if i == True:
+                index[count] = None
+            count = count + 1
+        count = 0
+    return node
+
 def generate_children(node, chosen_symbol): # TODO: Create a function to generate the children states for minimax evaluation
-  possible_move = list()
-  copy_node = node
-  count_push = 0
-  while(node.count(None) != 0):     
-       for index in node:
-            if node[index] is None and count_push == 0:
-               copy_node[index] = chosen_symbol
-               count_push = count_push + 1
-               node[index] = True
-               
+    possible_move=list()
+    copy_node = node.copy()
+    count_push = 0
+    i = 0
+    while node.count(None) != 0:
+        for index in node:
+            if node[i] is None and count_push == 0:
+                copy_node[i] = chosen_symbol
+                count_push = count_push + 1
+                node[i] = True
+            i = i + 1
         possible_move.append(copy_node)
-        copy_node = node
+        copy_node = node.copy()
         count_push = 0
-    return possible_move
-    
+        i = 0
+    return change_element(possible_move)
+
 def alternate_symbol(symbol):
     return 'o' if symbol == 'x' else 'x'
 
