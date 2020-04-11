@@ -52,7 +52,7 @@ class TicTacToeGame():
 
     # TODO: Use your minimax alpha beta pruning algorithm here to set the machines turn
     def machine_turn(self):
-       self.board = mini_max(self.board, True, _MACHINE_SYMBOL)
+       mini_max(self.board, False, _MACHINE_SYMBOL)
 
     def format_board(self):
         row0 = "|".join(

@@ -31,17 +31,18 @@ def change_element(node):
 def generate_children(node, chosen_symbol): # TODO: Create a function to generate the children states for minimax evaluation
     possible_move=list()
     copy_node = node.copy()
+    node2 = node.copy()
     count_push = 0
     i = 0
-    while node.count(None) != 0:
-        for index in node:
-            if node[i] is None and count_push == 0:
+    while node2.count(None) != 0:
+        for index in node2:
+            if node2[i] is None and count_push == 0:
                 copy_node[i] = chosen_symbol
                 count_push = count_push + 1
-                node[i] = True
+                node2[i] = True
             i = i + 1
         possible_move.append(copy_node)
-        copy_node = node.copy()
+        copy_node = node2.copy()
         count_push = 0
         i = 0
     return change_element(possible_move)
@@ -71,6 +72,7 @@ def mini_max_ab(node, is_maximizing_player_turn, chosen_symbol): # TODO: Modify 
 
 def mini_max(node, is_maximizing_player_turn, chosen_symbol):
     game_result = is_game_over(node)
+    map(lambda x: None if x == True else x, node)
 
     if game_result[0]:
         if game_result[1] is None:
