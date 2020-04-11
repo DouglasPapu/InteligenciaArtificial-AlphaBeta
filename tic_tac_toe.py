@@ -51,8 +51,10 @@ class TicTacToeGame():
         self.board[chosen_cell] = _PLAYER_SYMBOL
 
     # TODO: Use your minimax alpha beta pruning algorithm here to set the machines turn
-    def machine_turn(self):
-       mini_max(self.board, False, _MACHINE_SYMBOL)
+    def machine_turn(self): 
+        self.board = mini_max(self.board, True, _MACHINE_SYMBOL)[1]
+       
+       
 
     def format_board(self):
         row0 = "|".join(
@@ -70,5 +72,9 @@ class TicTacToeGame():
         print()
 
     def print_result(self):
-        print(
-            f"{_PLAYER if is_game_over(self.board)[1] == _PLAYER_SYMBOL else _MACHINE} wins!")
+        if is_game_over(self.board)[1] == _MACHINE_SYMBOL:
+            print("player "+_MACHINE+" win!")
+        elif is_game_over(self.board)[1] == _PLAYER_SYMBOL:
+            print("player "+_PLAYER+" win")
+        else:
+            print("Empate!")
