@@ -1,5 +1,5 @@
 import re
-from alpha_beta import mini_max_ab, is_game_over, mini_max
+from alpha_beta import mini_max_ab, is_game_over
 _PLAYER = "player"
 _MACHINE = "machine"
 
@@ -52,7 +52,9 @@ class TicTacToeGame():
 
     # TODO: Use your minimax alpha beta pruning algorithm here to set the machines turn
     def machine_turn(self): 
-        self.board = mini_max(self.board, True, _MACHINE_SYMBOL)[1]
+        alpha = 0
+        beta = 0
+        self.board = mini_max_ab(self.board, False, _MACHINE_SYMBOL, alpha, beta)[1]
        
        
 
